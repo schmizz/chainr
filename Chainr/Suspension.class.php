@@ -34,6 +34,11 @@ class Chainr_Suspension {
 			throw new Chainr_Exception('Failed to load source XML: '.$this->siteXml);
 		}
 
+		// Check version of site's XML
+		if (isset($doc->version) && $doc->version != '1.0') {
+			throw new Chainr_Exception('Invalid chainr version at site\'s XML.');
+		}
+
 		// Prepare context
 		$context = Chainr_Context::create()->init(new Chainr_Request(), new Chainr_Response(), Chainr_Session::getInstance());
 		$context->setDocument($doc);
