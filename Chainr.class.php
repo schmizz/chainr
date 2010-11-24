@@ -97,16 +97,15 @@ class Chainr {
 	 * @param Exception $e Exception to be prettified.
 	 */
 	public static function prettifyException(Exception $e) {
-		echo "<pre>";
-		echo get_class($e);
-		printf("Chainr Ausnahme gefangen: %s\n<br/>", $e->getMessage());
-
 		$out = '';
 		foreach ($e->getTrace() as $item) {
-	//		$out .= sprintf('<tr><td>%s</td><td>%s</td><td>%s</td></tr>', $item['class'], $item['type'], $item['function']);
-			var_dump($item);
+			$class = isset($item['class']) ? $item['class'] : 'n/a';
+			$type  = isset($item['type'])  ? $item['type']  : 'n/a';
+
+			$out .= sprintf('<tr><td>%s</td><td>%s</td><td>%s</td></tr>'."\n", $class, $type, $item['function']);
 		}
-		$out .= '<table>'.$out.'</table>';
-		echo "$out<pre>";
+		$out = '<html><head><title>chainr exception</title></head><body><pre>Chainr Ausnahme gefangen: '.$e->getMessage().'<table>'.$out.'</table></pre></body></html>';
+		
+		echo $out;
 	}
 }

@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2010, Christian Schmitz, Soulworks GmbH
  */
 class Chainr_Filter_HtmlRenderFilter extends Chainr_Filter implements Chainr_OutputFilter {
+	
 	private $pagesDir;
 
 	public function __construct(array $options = array()) {

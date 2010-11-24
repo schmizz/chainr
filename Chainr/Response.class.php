@@ -158,8 +158,6 @@ class Chainr_Response {
 	}
 
 	public function unsetCookie($name, $path = null, $domain = null, $secure = null, $httponly = null)	{
-		// false as the value, triggers deletion
-		// null for the lifetime, since Agavi automatically sets that when the value is false or null
 		$this->setCookie($name, false, null, $path, $domain, $secure, $httponly);
 	}
 
@@ -189,7 +187,7 @@ class Chainr_Response {
 			header($httpStatusCode);
 		}
 
-		$this->setHttpHeader('X-Powered-By', 'me');
+		$this->setHttpHeader('X-Powered-By', 'Chainr');
 
 		foreach ($this->getHttpHeaders() as $name => $value) {
 			if (!is_null($value)) {

@@ -11,11 +11,20 @@ class Chainr_Filter_LanguageFilter extends Chainr_Filter implements Chainr_Input
 
 	private $availableLanguages = array();
 
+	private $defaultLanguage = null;
+
 	public function __construct(array $options = array()) {
 		parent::__construct(Chainr_Helper::getSimpleClassNameOf(__CLASS__));
 
 		if (isset($options['languages'])) {
 			$this->availableLanguages = $options['languages'];
+		}
+
+		if (isset($options['default_language'])) {
+			$this->defaultLanguage = $options['default_language'];
+		}
+		else if(count($this->availableLanguages) > 0) {
+			$this->defaultLanguage = reset($this->availableLanguages);
 		}
 	}
 
@@ -30,11 +39,19 @@ class Chainr_Filter_LanguageFilter extends Chainr_Filter implements Chainr_Input
 			$detectedLanguage = $language;
 		} elseif ($session->has('language')) {
 			$detectedLanguage = $session->get('language');
+		} elseif (!is_null($this->defaultLanguage)) {
+			$detectedLanguage = $this->defaultLanguage;
 		}
 
-		// Determine current language
+		// Append current language
 		if (!is_null($detectedLanguage) && $this->isAvailableLanguage($detectedLanguage)) {
 			$node->appendTextNode('current_language', $detectedLanguage);
+		}
+
+		// Append available languages
+		$availableLanguagesNode = $node->appendNode('available_languages');
+		foreach($this->availableLanguages as $langKey => $langName) {
+			$availableLanguagesNode->appendTextNode('language', $langName)->appendAttribute('key', $langKey);
 		}
 
 		$session->set('language', $detectedLanguage);
@@ -49,7 +66,7 @@ class Chainr_Filter_LanguageFilter extends Chainr_Filter implements Chainr_Input
 	 * @return bool
 	 */
 	protected function isAvailableLanguage($language) {
-		return in_array($language, $this->availableLanguages);
+		return array_key_exists($language, $this->availableLanguages);
 	}
 
 }
