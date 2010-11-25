@@ -45,7 +45,6 @@ abstract class Chainr_Filter {
 			$stop = call_user_func_array(array($this, $methodName), array(
 				 $filterChain->getContext(), $node
 			));
-//			var_dump(array($this, $methodName, $stop));
 		}
 
 		if ($stop === false) {
@@ -61,7 +60,6 @@ abstract class Chainr_Filter {
 			$stop = call_user_func_array(array($this, $methodName), array(
 				 $filterChain->getContext()
 			));
-//			var_dump(array($this, $methodName, $stop));
 		}
 
 		return $stop;

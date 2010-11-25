@@ -47,8 +47,8 @@ class Chainr_Filter_HtmlRenderFilter extends Chainr_Filter implements Chainr_Out
 		// Create a processor
 		$xsltp = new XSLTProcessor();
 
-		// Put some parameters at the processor
-		foreach ($sxl->xpath('//filter[@id=\'requestDataFilter\']/environment/parameter') as $param) {
+		// Put environment parameters at the processor
+		foreach ($sxl->xpath('//environment/parameter') as $param) {
 			$xsltp->setParameter('', $param->attributes()->name, (string)$param);
 		}
 		$xsltp->setParameter('', 'page', $page);

@@ -7,6 +7,7 @@
  * @copyright Copyright (c) 2010, Christian Schmitz, Soulworks GmbH
  */
 class Chainr_FilterChain {
+
 	protected $chain = array();
 
 	protected $index = -1;

@@ -24,14 +24,38 @@ class Chainr_Suspension {
 	 * Initializes the suspension.
 	 */
 	protected function init() {
+		$params = array(
+			 'script_name' => $_SERVER['SCRIPT_NAME'],
+			 'root'        => dirname($_SERVER['SCRIPT_NAME'])
+		);
+		
 		// Create a new DOM document with upgraded elements
 		$doc = new DOMDocument('1.0', 'utf-8');
 		$doc->registerNodeClass('DOMElement', 'Chainr_ExtendedDOMElement');
 		$doc->xmlStandalone = true;
 
+		// Read XML and replace params
+		$xml = file_get_contents($this->siteXml);
+		$patterns = array();
+		$replacements = array();
+		foreach ($params as $paramName => &$paramValue) {
+			$patterns[]     = '/%chainr.'.$paramName.'%/i';
+			$replacements[] = $paramValue;
+		}
+		$xml = preg_replace($patterns, $replacements, $xml);
+
 		// Load data to the document
-		if ($doc->load($this->siteXml) === false) {
+		if ($doc->loadXML($xml) === false) {
 			throw new Chainr_Exception('Failed to load source XML: '.$this->siteXml);
+		}
+
+		$node = $doc->documentElement; // Root node of the document
+
+		// Append environment parameters to site's source
+		$env = $node->appendNode('environment');
+		foreach ($params as $paramName => &$paramValue) {
+			$env->appendTextNode('parameter', $paramValue)
+				 ->appendAttribute('name', $paramName);
 		}
 
 		// Check version of site's XML

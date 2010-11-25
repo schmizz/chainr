@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * This filter appends all get- and cookie-parameters to the site's source.
+ * 
  * @package Chainr
  * @subpackage Filter
  * 
@@ -28,26 +30,6 @@ class Chainr_Filter_RequestDataFilter extends Chainr_Filter implements Chainr_In
 				$ps->appendTextNode('parameter', $v)->appendAttribute('name', $k);
 			}
 		}
-
-		// Append all server varaibles
-		/*
-		$server = $node->appendNode('server');
-		foreach($_SERVER as $k => $v) {
-			if (!is_scalar($v)) {
-				continue;
-			}
-			$server->appendTextNode('parameter', $v)
-					 ->appendAttribute('name', $k);
-		}
-		*/
-
-		$env = $node->appendNode('environment');
-		$env->appendTextNode('parameter', $_SERVER['SCRIPT_NAME'])
-		    ->appendAttribute('name', 'script_name');
-		$env->appendTextNode('parameter', dirname($_SERVER['SCRIPT_NAME']))
-		    ->appendAttribute('name', 'dir_name');
-		$env->appendTextNode('parameter', dirname($_SERVER['SCRIPT_NAME']))
-		    ->appendAttribute('name', 'root_dir');
 
 		return false;
 	}
