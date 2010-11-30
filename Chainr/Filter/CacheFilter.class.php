@@ -21,6 +21,8 @@ class Chainr_Filter_CacheFilter extends Chainr_Filter implements Chainr_InputFil
 	
 	private $cacheDir = './cache/';
 	
+	private $noCacheParamName = 'nocache';
+	
 	public function __construct($options = array()) {
 		parent::__construct(Chainr_Helper::getSimpleClassNameOf(__CLASS__));
 
@@ -34,6 +36,10 @@ class Chainr_Filter_CacheFilter extends Chainr_Filter implements Chainr_InputFil
 
 		if (isset($options['cache_dir'])) {
 			$this->cacheDir = $options['cache_dir'];
+		}
+
+		if (isset($options['no_cache_param_name'])) {
+			$this->noCacheParamName = $options['no_cache_param_name'];
 		}
 	}
 	
@@ -58,9 +64,14 @@ class Chainr_Filter_CacheFilter extends Chainr_Filter implements Chainr_InputFil
 	 * @return bool
 	 */
 	protected function isCacheable(Chainr_Request $request) {
-		// We only cache get requests currently, so we'll
-		// continue at the chain
-		return ($request->getMethod() == Chainr_Request::METHOD_GET);
+		// Check wether caching is suppressed
+		$noCache = $request->hasParameter($this->noCacheParamName);
+		
+		// Check wether the current request is a GET request
+		$isGet = $request->getMethod() == Chainr_Request::METHOD_GET;
+		
+		// Should we'll continue at the chain?
+		return ($isGet && !$noCache);
 	}
 
 	public function executeInput(Chainr_Context $context, Chainr_ExtendedDOMElement $node) {

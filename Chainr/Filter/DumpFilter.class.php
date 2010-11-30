@@ -14,14 +14,20 @@
 class Chainr_Filter_DumpFilter extends Chainr_Filter implements Chainr_OutputFilter, Chainr_InputFilter {
 	protected $dump = false;
 	
-	public function __construct() {
+	private $paramName = 'dump';
+	
+	public function __construct(array $options = array()) {
 		parent::__construct(Chainr_Helper::getSimpleClassNameOf(__CLASS__));
+		
+		if (isset($options['param_name'])) {
+			$this->paramName = $options['param_name'];
+		}
 	}
 
 	public function executeInput(Chainr_Context $context, Chainr_ExtendedDOMElement $node) {
 		$request  = $context->getRequest(); /* @var $request Chainr_Request */
 
-		$this->dump = $request->hasParameter('dump');
+		$this->dump = $request->hasParameter($this->paramName);
 
 		return false;
 	}
