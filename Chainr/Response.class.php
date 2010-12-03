@@ -184,7 +184,7 @@ class Chainr_Response {
 	public function sendHeaders() {
 		// Send HTTP status code
 		if(($httpStatusCode = $this->getHttpStatusCode()) != null) {
-			header($httpStatusCode);
+			header($this->http11StatusCodes[$httpStatusCode]);
 		}
 
 		$this->setHttpHeader('X-Powered-By', 'Chainr');
