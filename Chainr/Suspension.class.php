@@ -24,9 +24,15 @@ class Chainr_Suspension {
 	 * Initializes the suspension.
 	 */
 	protected function init() {
+		// Determine root
+		$root = dirname($_SERVER['SCRIPT_NAME']);
+		if ('/' == $root) {
+			$root = '';
+		}
+
 		$params = array(
 			 'script_name' => $_SERVER['SCRIPT_NAME'],
-			 'root'        => dirname($_SERVER['SCRIPT_NAME'])
+			 'root'        => $root
 		);
 		
 		// Create a new DOM document with upgraded elements
