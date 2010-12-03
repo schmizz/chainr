@@ -9,7 +9,7 @@
  */
 class Chainr_Filter_RoutingFilter extends Chainr_Filter implements Chainr_InputFilter, Chainr_OutputFilter {
 
-	private $goHome = false;
+	private $redirectToHome = false;
 	
 	public function __construct() {
 		parent::__construct(Chainr_Helper::getSimpleClassNameOf(__CLASS__));
@@ -18,9 +18,11 @@ class Chainr_Filter_RoutingFilter extends Chainr_Filter implements Chainr_InputF
 	public function executeOutput(Chainr_Context $context) {
 		$response = $context->getResponse(); /* @var $response Chainr_Response */
 
-		if ($this->goHome) {
+		if ($this->redirectToHome) {
+			$redirectTo = 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).'/';
+			
+			$response->setHttpHeader('Location', $redirectTo, true);
 			$response->setHttpStatusCode('301');
-			$response->setHttpHeader('Location', '/home', true);
 			$response->send();
 		}
 
@@ -31,12 +33,13 @@ class Chainr_Filter_RoutingFilter extends Chainr_Filter implements Chainr_InputF
 		$request = $context->getRequest();
 		
 		$path = isset($_GET['path']) ? $_GET['path'] : null;
-/*
-		if (is_null($path)) {
-			$this->goHome = true;
+
+		// @todo Make homepage configurable
+		if ('home' == $path) {
+			$this->redirectToHome = true;
 			return true;
 		}
-*/
+
 		if (!is_null($path)) {
 			if (strpos($path, '/') != false) {
 				$segments = explode('/', $path);
