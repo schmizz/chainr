@@ -1,0 +1,32 @@
+#DirectoryIndex index.php
+
+<IfModule mod_php5.c>
+	php_value include_path ".:../src"
+</IfModule>
+
+<IfModule !mod_php5.c>
+	<FilesMatch "\.php$">
+		Order allow,deny
+		Deny from all
+		Allow from none
+	</FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /~christian.schmitz/chainr/
+	
+	# If the file/symlink/directory does not exist => Redirect to index.php
+	# Important note: If you copy/paste this into httpd.conf instead
+	# of .htaccess you will need to add ‘%{DOCUMENT_ROOT}’ left to each
+	# ‘%{REQUEST_FILENAME}’ part.
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-l
+	
+	# For use with the RealUrl extension, you might need to remove the
+	# RewriteBase directive somewhere above and use this line instead of the
+	# next one:
+	# RewriteRule .* /index.php [L]
+	RewriteRule ^(.*/?)$ ./index.php?path=$1&%{QUERY_STRING} [NC,L]
+</IfModule>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?> 
+<chainr version="1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<website>
+		<title>chainr</title>
+	</website>
+	
+	<!-- // Main navigation // -->
+	<navigation id="main">
+		<item id="home">Welcome</item>
+		<item id="setup">Setup</item>
+		<item id="filters">Chains and filters</item>
+		<item id="development">Development</item>
+		<item id="contact">Contact</item>
+	</navigation>
+	
+	<!-- // Footer navigation // -->
+	<navigation id="footer">
+		<item id="x">X</item>
+	</navigation>
+	
+</chainr>
