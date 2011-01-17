@@ -48,6 +48,7 @@ class Chainr {
 		'Chainr_Filter_RequestDataFilter'      => 'Chainr/Filter/RequestDataFilter.class.php',
 		'Chainr_Filter_RoutingFilter'          => 'Chainr/Filter/RoutingFilter.class.php',
 		'Chainr_Filter_HtmlRenderFilter'       => 'Chainr/Filter/HtmlRenderFilter.class.php',
+		'Chainr_Filter_PDOInputFilter'         => 'Chainr/Filter/PDOInputFilter.class.php',
 		'Chainr_Suspension'         => 'Chainr/Suspension.class.php',
 		'Chainr_ExtendedDOMElement' => 'Chainr/ExtendedDOMElement.class.php',
 		'Chainr_Request'            => 'Chainr/Request.class.php',
