@@ -37,7 +37,8 @@ try {
 	$site->registerFilter(new Chainr_Filter_CacheFilter(array(
 	    'cache_dir' => './_cache/',
 		'ttl'       => 3600
-	)));*/
+	)));
+	*/
 	$site->registerFilter(new Chainr_Filter_HtmlRenderFilter(array(
 	    'pages_dir' => './_pages/'
 	)));
@@ -48,6 +49,15 @@ try {
 	)));
 	$site->registerFilter(new Chainr_Filter_RequestDataFilter());
 	$site->registerFilter(new Chainr_Filter_RoutingFilter());
+	/*
+	$site->registerFilter(new Chainr_Filter_PDOInputFilter(array(
+		'id'    => 'myUsers', // Override default identifier of the filter
+		'dsn'   => 'mysql:host=_your_db_host_;dbname=_your_db_name_',
+		'user'  => '_your_db_user_',
+		'pass'  => '_your_db_pass_',
+		'query' => 'SELECT * FROM members'
+	)));
+	*/
 
 	$site->render();
 } catch(Chainr_Exception $e) {
