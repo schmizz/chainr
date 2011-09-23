@@ -1,4 +1,7 @@
-body { color:#9CA6A5; background-color: #EFEFEF; }
+body { 
+	color:#9CA6A5; 
+	background: #EFEFEF url('../img/white_texture.png'); 
+}
 
 form ol { list-style-type:none; list-style-position:inside; margin:0; padding:0; }
 label { display:block; }
@@ -49,7 +52,7 @@ nav.languages a {
 
 /* COLORS */
 
-h1, h2, h3 { color:#454A4C; }
+h1, h2, h3 { color:#454A4C; font-family: 'Istok Web', sans-serif; }
 h2.teaser { color:#454A4C; }
 
 p, code, pre { color:#454A4C; }
