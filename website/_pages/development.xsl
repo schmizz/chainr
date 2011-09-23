@@ -10,7 +10,7 @@
 			<xsl:with-param name="language" select="'en'" />
 			<xsl:with-param name="content">
 				<header><h1>Development</h1></header>
-				<h2 class="teaser">Development</h2>
+				<p>Chainr is currently living unter the Apache License, Version 2.0, at <a href="https://github.com/soulworks/chainr">github</a>. If Chainr may be somehow useful for you, just fork it.</p>
 			</xsl:with-param>
 		</xsl:call-template>
 

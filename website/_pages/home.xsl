@@ -10,6 +10,7 @@
 			<xsl:with-param name="content">
 				<header><h1>Welcome</h1></header>
 				<h2 class="teaser">Hi, welcome to the website of <span class="chainr">chainr</span>.</h2>
+				<p>Chainr is a simple XSLT- and PHP-based toolchain for creating small websites without any great efforts.</p>
 			</xsl:with-param>
 		</xsl:call-template>
 

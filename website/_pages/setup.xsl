@@ -11,7 +11,7 @@
 			<xsl:with-param name="language" select="'en'" />
 			<xsl:with-param name="content">
 				<header><h1>Setup</h1></header>
-				<h2 class="teaser">.</h2>
+				<h2 class="teaser"></h2>
 
 <h2>Prepare .htaccess</h2>
 <code><pre class="brush: js;"><![CDATA[
