@@ -14,7 +14,7 @@
 				<h2 class="teaser">.</h2>
 
 <h2>Prepare .htaccess</h2>
-<code><pre><![CDATA[
+<code><pre class="brush: js;"><![CDATA[
 <IfModule mod_rewrite.c>
 	RewriteEngine on
 	RewriteBase /
@@ -35,7 +35,7 @@
 ]]></pre></code>
 
 <h2>Prepare index.php</h2>
-<code dojoType="dojox.highlight.Code"><pre><![CDATA[
+<code><pre class="brush: js;"><![CDATA[
 // Enable strict error reporting
 error_reporting(E_ALL | E_STRICT);
 
@@ -71,7 +71,7 @@ try {
 ]]></pre></code>
 
 <h2>Prepare index.php</h2>
-<code dojoType="dojox.highlight.Code"><pre><![CDATA[
+<code><pre class="brush: js;"><![CDATA[
 	<ala>xxx</ala>
 ]]></pre></code>
 
