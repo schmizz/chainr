@@ -53,6 +53,14 @@ extension-element-prefixes="exsl"/>
 			<meta http-equiv="X-UA-Compatible" content="IE=8" />
 
 			<xsl:call-template name="additional-headers" />
+			<style>
+				@import url(http://fonts.googleapis.com/css?family=Istok+Web);
+			</style>
+			
+			<script type="text/javascript" src="{$root}/assets/vendor/syntaxhighlighter/scripts/shCore.js"></script>
+			<script type="text/javascript" src="{$root}/assets/vendor/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+			<link type="text/css" rel="stylesheet" href="{$root}/assets/vendor/syntaxhighlighter/styles/shCore.css"/>
+			<script type="text/javascript">SyntaxHighlighter.all();</script>
 		</head> 
 		<body>
 			<section class="container">
